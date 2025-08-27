@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Anime World</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container flex-between">
+      <h1 class="name">My Anime World</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="top10.html">Top 4 Animes</a>
+        <a href="no.html">About</a>
+        <a href="no.html">Contact</a>
+        <a href="SignUp_LogIn_Form.html">Login</a>
+        <!-- <a href="signup.html">Sign Up</a> -->
+      </nav>
+    </div>
+  </header>
+
+ 
+
+  <!-- Layout -->
+  <main class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <section id="about" class="card">
+        <h2>About Anime</h2>
+        <p>Welcome to My Anime World! This is where I share my favorite anime series, characters, and recommendations for fellow fans.</p>
+      </section>
+
+      <section class="card">
+        <h2>Genres I Love</h2>
+        <ul class="skill-list">
+          <li>Shonen <span class="badge">🔥</span></li>
+          <li>Isekai <span class="badge">🌏</span></li>
+          <li>Romance <span class="badge">💖</span></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Ongoing</h2>
+        <ul>
+          <li>One Piece</li>
+          <li>Solo Leveling</li>
+          <li>Attack on Titan</li>
+        </ul>
+      </section>
+
+      <!-- Watchlist Section -->
+      <section id="watchlist" class="card">
+        <h2>My Watchlist</h2>
+        <div class="watchlist-container">
+          <input type="text" id="animeInput" placeholder="Enter anime name..." />
+          <button onclick="addAnime()">Add</button>
+        </div>
+        <ul id="animeList"></ul>
+      </section>
+      <!--iframe-->
+      <section id="#">
+        <iframe src="top10.html" frameborder="0" class="card" height="150%" width="100%"></iframe>
+      </section>
+    </aside>
+
+    <!-- Main Content -->
+    <section id="gallery" class="main-content">
+      <div class="card">
+        <h2>Anime Gallery</h2>
+        <div class="anime-grid">
+          <div class="anime-card">
+            <img src="images/op.jpg" alt="One Piece">
+            <h3>One Piece</h3>
+          </div>
+          <div class="anime-card">
+            <img src="images/sl.jpg" alt="Solo Leveling">
+            <h3>Solo Leveling</h3>
+          </div>
+          <div class="anime-card">
+            <img src="images/aot.jpg" alt="Attack on Titan">
+            <h3>Attack on Titan</h3>
+          </div>
+          <div class="anime-card">
+            <img src="images/ds.jpg" alt="Demon Slayer">
+            <h3>Demon Slayer</h3>
+          </div>
+          <div class="anime-card">
+            <img src="images/jj.jpg" alt="Jujutsu Kaisen">
+            <h3>Jujutsu Kaisen</h3>
+          </div>
+          <div class="anime-card">
+            <img src="images/n.jpeg" alt="Naruto">
+            <h3>Naruto</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Anime Table -->
+      <div id="anime-table" class="card">
+        <h2>Top Anime Rankings</h2>
+        <table border="1" cellpadding="10" style="width:100%; border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Attack on Titan</td>
+              <td>Action, Drama</td>
+              <td>9.8</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>One Piece</td>
+              <td>Adventure, Shonen</td>
+              <td>9.7</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Solo Leveling</td>
+              <td>Fantasy, Action</td>
+              <td>9.6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Contact Form -->
+      <div id="contact" class="card">
+        <h2>Contact Me</h2>
+        <form action="#" method="post">
+          <label for="name">Name:</label><br>
+          <input type="text" id="name" name="name" required><br><br>
+
+          <label for="email">Email:</label><br>
+          <input type="email" id="email" name="email" required><br><br>
+
+          <label for="message">Message:</label><br>
+          <textarea id="message" name="message" rows="5" required></textarea><br><br>
+
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="contact-info">
+          <p>Contact: <a href="mailto:femilinaswinthra731@gmail.com">femilinaswinthra731@gmail.com</a></p>
+        </div>
+        <div class="social-links">
+          <a href="#">Instagram</a>
+          <span class="divider">|</span>
+          <a href="#">MyAnimeList</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 My Anime World</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ✅ Script for Watchlist -->
+  <script>
+    function addAnime() {
+      const input = document.getElementById("animeInput");
+      const animeName = input.value.trim();
+      if (animeName === "") return;
+
+      const li = document.createElement("li");
+
+      // Text span
+      const span = document.createElement("span");
+      span.textContent = animeName;
+      span.onclick = () => li.classList.toggle("completed");
+
+      // Remove button
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "❌";
+      removeBtn.style.marginLeft = "10px";
+      removeBtn.onclick = () => li.remove();
+
+      li.appendChild(span);
+      li.appendChild(removeBtn);
+      document.getElementById("animeList").appendChild(li);
+
+      input.value = "";
+    }
+  </script>
+</body>
+</html>

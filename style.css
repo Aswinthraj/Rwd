@@ -1,0 +1,178 @@
+:root {
+  --card-height: 320px;
+  --card-width: calc(var(--card-height) / 1.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* === Navbar === */
+.site-header {
+  width: 100%;
+  background: #0f3460; /* semi-transparent dark */
+  padding: 15px 40px;
+  position: fixed;  /* stays on top */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px); /* glassy effect */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo / Name */
+.name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f0a500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Navigation Links */
+.nav a {
+  margin-left: 25px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: #f0a500;
+}
+
+/* Underline Hover Animation */
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0%;
+  height: 2px;
+  background: #f0a500;
+  transition: width 0.3s ease;
+}
+.nav a:hover::after {
+  width: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 40px;
+}
+
+/* === Gallery Layout === */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+/* === Card Style === */
+.card {
+  width: var(--card-width);
+  height: var(--card-height);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  perspective: 2500px;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  /* object-fit: contain; */
+}
+.card:hover {
+  transform: scale(1.07);
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  
+  border-radius: 10px;
+  background: rgba(0,0,0,0.2); 
+}
+
+
+/* Wrapper (3D Tilt) */
+.wrapper {
+  transition: all 0.5s;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  border-radius: 10px;
+}
+.card:hover .wrapper {
+  transform: perspective(900px) translateY(-5%) rotateX(25deg);
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* Character Pop-up */
+.character {
+  width: 100%;
+  opacity: 0;
+  transition: all 0.5s;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+}
+.card:hover .character {
+  opacity: 1;
+  transform: translate3d(0%, -30%, 100px);
+}
+.character {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;   
+  display: block;
+  margin: 0 auto;
+  opacity: 0;
+  transition: all 0.5s;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+}
+
+
+/* Info Text */
+.info {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+}
+.card:hover .info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glow Effect */
+.card:hover {
+  box-shadow: 0 0 25px rgba(0, 180, 255, 0.6);
+}
+
